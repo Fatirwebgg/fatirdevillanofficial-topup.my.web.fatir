@@ -3,7 +3,9 @@
     --blue : #2c2546;
     --dark-blue : #1b1535;
     --green : #00eb09;
-    --white : #fff;
+    --white : #FFFFFF;
+    --red : #FF0000;
+    --black : #000000;
 }
 
 *
@@ -104,7 +106,7 @@ nav ul li a:hover
 
 .slides img 
 {
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .slide
@@ -211,7 +213,7 @@ nav ul li a:hover
 
 .harga
 {
-    color: var(--green);
+    color: var(--red);
 }
 
 .link a
@@ -221,12 +223,12 @@ nav ul li a:hover
 
 .link a:hover
 {
-    color: var(--green)
+    color: var(--white)
 }
 
 .pesan
 {
-    background-color: var(--green);
+    background-color: var(--white);
     padding: 5%;
     border-radius: 10px;
 }
@@ -240,7 +242,7 @@ nav ul li a:hover
 
 .pesan img
 {
-    width: 30px;
+    width: 28px;
 }
 
 .tentang
@@ -286,7 +288,7 @@ footer
 #copyright
 {
     text-align: center;
-    padding: 10px;
+    padding: 15px;
 }
 
 @media screen and (max-width: 600px) {
@@ -341,7 +343,7 @@ h2
 
 .pesan
     {
-    background-color: var(--green);
+    background-color: var(--black);
     padding: 3%;
     border-radius: 10px;
     }
@@ -374,4 +376,4 @@ h2
     {
         width: 10%;
     }
-    }
+}
