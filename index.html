@@ -1,648 +1,706 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝗙𝗔𝗧𝗜𝗥𝗗𝗘𝗩𝗜𝗟𝗟𝗔𝗡.𝗧𝗢𝗣𝗨𝗣</title>
+    <title>Tempat TopUp Game Teraman</title>
+    <title>FATIRTOPUP - Tempat Topup Game Termurah</title>
     <link rel="icon" href="https://h.top4top.io/p_33363xa4j0.jpg">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #9c27b0;
+            --accent: #ff9800;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 8s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ff9800, #ffeb3b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+        
+        .game-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106,27,154,0.3), rgba(156,39,176,0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .game-card:hover::after {
+            opacity: 1;
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .game-info {
+            padding: 1.2rem;
+        }
+        
+        .game-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .game-desc {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-buy {
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), #ffc107);
+            color: var(--dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #1e1e3a, #2a2a4a);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            text-align: center;
+        }
+        
+        .price-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+        
+        .price-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .price-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .diamond-amount {
+            font-weight: 600;
+        }
+        
+        .price-amount {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .btn-confirm {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 1.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 27, 154, 0.5);
+        }
+        
+        .floating-wa {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            animation: float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-wa:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-wa img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="/" class="title">𝗙𝗔𝗧𝗜𝗥 𝗗𝗘𝗩𝗜𝗟𝗟𝗔𝗡 𝗢𝗙𝗙𝗜𝗖𝗜𝗔𝗟</a>
-        <input type="search" name="id" class="input-search" placeholder="Cari Layanan">
-        <button type="submit" class="input-submit">𝗖𝗔𝗥𝗜</button>
-        <nav>
-            <ul>
-                <li><a href="#home">𝗕𝗘𝗥𝗔𝗡𝗗𝗔</a></li>
-                <li><a href="#populer">𝗣𝗥𝗢𝗗𝗨𝗞</a></li>
-                <li><a href="#tentang">𝗧𝗘𝗡𝗧𝗔𝗡𝗚</a></li>
-                <li><a href="#kontak">𝗞𝗢𝗡𝗧𝗔𝗞</a></li>
-            </ul>
-        </nav>
+        <div class="logo">FATIRTOPUP</div>
+        <div class="tagline">Topup Game Termurah, Aman & Tercepat di Indonesia</div>
     </header>
-
-
-    <div id="home" class="slider">
-        <h4>Klik Disini Untuk Slide Gambar, klik chou untuk ke instagram, klik kelly untuk ke whatsapp</h4>
-        <input type="radio" name="choose" id="" class="choose_1">
-        <input type="radio" name="choose" id="" class="choose_2">
-        <div class="slides">
-            <a href="http://instagram.com/maha4tir315" target="_blank" rel="noopener noreferrer" class="slide s1">
-                <img src="https://files.catbox.moe/y4yiuk.jpg" alt="" >
-            </a>
-            <a href="https://wa.me/6285168827920" target="_blank" rel="noopener noreferrer" class="slide">
-                <img src="https://files.catbox.moe/mpqry8.jpg" alt="">
-            </a>
-            
-        </div>
-    </div>
-
-    <h1 class="title-p">𝗧𝗘𝗥𝗦𝗘𝗗𝗜𝗔</h1>
-    <section id="populer" class="populer">
-
-        <div class="ff">
-            <div class="link">
-                <a href="#harga-ff">
-                        <img src="https://files.catbox.moe/xryx01.png" alt="https://files.catbox.moe/xryx01.png">
-                        <div class="judul-produk">Free Fire</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-ff">
-                <div class="popup">
-                    <h2>𝗙𝗥𝗘𝗘 𝗙𝗜𝗥𝗘 𝗗𝗜𝗔𝗠𝗢𝗡𝗗</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        70 Diamonds  : 
-                        <br>    
-                        <span class="harga">Rp 10.000</span>
-                        <br>
-                        140 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 20.000</span>
-                        <br>
-                        210 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 30.000</span>
-                        <br>
-                        280 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 40.000</span>
-                        <br>
-                        375 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 50.000</span>
-                        <br>
-                        500 Diamond  : 
-                        <br>
-                        <span class="harga">Rp 70.000</span>
-                        <br>
-                        770 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 100.000</span>
-                        <br>
-                        1000 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 130.000</span>
-                        <br>
-                        M. Mingguan  : 
-                        <br>
-                        <span class="harga">Rp 30.000</span>
-                        <br>
-                        M. Bulanan   : 
-                        <br>
-                        <span class="harga">Rp 140.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">𝗣𝗲𝘀𝗮𝗻 𝗦𝗲𝗸𝗮𝗿𝗮𝗻𝗴</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mlbb">
-            <div class="link">
-                <a href="#harga-mlbb">
-                        <img src="https://files.catbox.moe/pdwba1.jpg" alt="https://files.catbox.moe/pdwba1.jpg">
-                        <div class="judul-produk">Mobile Legends</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-mlbb">
-                <div class="popup">
-                    <h2>𝗠𝗢𝗕𝗜𝗟𝗘 𝗟𝗘𝗚𝗘𝗡𝗗 𝗗𝗜𝗔𝗠𝗢𝗡</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        28 Diamonds  : 
-                        <br>    
-                        <span class="harga">Rp 10.000</span>
-                        <br>
-                        56 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 20.000</span>
-                        <br>
-                        86 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 30.000</span>
-                        <br>
-                        170 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 50.000</span>
-                        <br>
-                        240 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 70.000</span>
-                        <br>
-                        278 Diamond  : 
-                        <br>
-                        <span class="harga">Rp i0.000</span>
-                        <br>
-                        344 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 100.000</span>
-                        <br>
-                        500 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 150.000</span>
-                        <br>
-                        875 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 235.000</span>
-                        <br>
-                        965 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 260.000</span>
-                        <br>
-                        1139 Diamonds : 
-                        <br>
-                        <span class="harga">Rp 300.000</span>
-                        <br>
-                        Starlight Biasa  : 
-                        <br>
-                        <span class="harga">Rp 90.000</span>
-                        <br>
-                        Starlight Plus   : 
-                        <br>
-                        <span class="harga">Rp 220.000</span>
-                        <br>
-                        Wdp 1x/Minggu   : 
-                        <br>
-                        <span class="harga">Rp 32.000</span>
-                        <br>
-                        Wdp 2x/Minggu   : 
-                        <br>
-                        <span class="harga">Rp 60.000</span>
-                        <br>
-                        Wdp 3x/Minggu   : 
-                        <br>
-                        <span class="harga">Rp 90.000</span>
-                        <br>
-                        Wdp 4x/Minggu   : 
-                        <br>
-                        <span class="harga">Rp 118.000</span>
-                        <br>
-                        Wdp 5x/Minggu   : 
-                        <br>
-                        <span class="harga">Rp 144.500</span>
-                        <br>
-                        Twilight Pass   : 
-                        <br>
-                        <span class="harga">Rp 150.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">𝗣𝗲𝘀𝗮𝗻 𝗦𝗲𝗸𝗮𝗿𝗮𝗻𝗴</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="genshin">
-            <div class="link">
-                <a href="#harga-genshin">
-                        <img src="https://files.catbox.moe/p6bbma.jpg" alt="https://files.catbox.moe/p6bbma.jpg">
-                        <div class="judul-produk">Genshin Impact</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-genshin">
-                <div class="popup">
-                    <h2>𝗚𝗘𝗡𝗦𝗛𝗜𝗡 𝗖𝗥𝗬𝗦𝗧𝗔𝗟</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        60 Crystal  : 
-                        <br>    
-                        <span class="harga">Rp 15.000</span>
-                        <br>
-                        300+30 Crystal : 
-                        <br>
-                        <span class="harga">Rp 70.000</span>
-                        <br>
-                        980+110 Crystal : 
-                        <br>
-                        <span class="harga">Rp 190.000</span>
-                        <br>
-                        1280+140 Crystal : 
-                        <br>
-                        <span class="harga">Rp 245.000</span>
-                        <br>
-                        1980+260 Crystal : 
-                        <br>
-                        <span class="harga">Rp 400.500</span>
-                        <br>
-                        3280+600 Crystal : 
-                        <br>
-                        <span class="harga">Rp 600.000</span>
-                        <br>
-                        4260+710 Crystal : 
-                        <br>
-                        <span class="harga">Rp 785.000</span>
-                        <br>
-                        6480+1600 : 
-                        <br>
-                        <span class="harga">Rp 1.200.000</span>
-                        <br>
-                        Bwm 1x  : 
-                        <br>
-                        <span class="harga">Rp 65.000</span>
-                        <br>
-                        Bwm 2c : 
-                        <br>
-                        <span class="harga">Rp 135.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="gerena">
-            <div class="link">
-                <a href="#harga-gerena">
-                        <img src="https://files.catbox.moe/ler7dx.jpg" alt="https://files.catbox.moe/ler7dx.jpg">
-                        <div class="judul-produk">Voucher Gerena Shell</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-gerena">
-                <div class="popup">
-                    <h2>𝗩𝗢𝗨𝗖𝗛𝗘𝗥 𝗚𝗘𝗥𝗘𝗡𝗔 𝗦𝗛𝗘𝗟𝗟</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        33 Shell : 
-                        <br>    
-                        <span class="harga">Rp 15.000</span>
-                        <br>
-                        66 Shell : 
-                        <br>
-                        <span class="harga">Rp 25.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/6fcy60.jpg" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hd">
-            <div class="link">
-                <a href="#harga-hd">
-                        <img src="https://files.catbox.moe/56d582.jpg" alt="https://files.catbox.moe/56d582.jpg">
-                        <div class="judul-produk">Higgs Domino</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-hd">
-                <div class="popup">
-                    <h2>𝗛𝗜𝗚𝗚𝗦 𝗗𝗢𝗠𝗜𝗡𝗢</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        Kosong  : 
-                        <br>    
-                        <span class="harga">Rp Tak tersedia</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="faloran">
-            <div class="link">
-                <a href="#harga-valo">
-                        <img src="https://files.catbox.moe/fp4fg2.jpg" alt="https://files.catbox.moe/fp4fg2.jpg">
-                        <div class="judul-produk">Valorant</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-valo">
-                <div class="popup">
-                    <h2>𝗩𝗔𝗟𝗢𝗥𝗔𝗡𝗧 𝗣𝗢𝗜𝗡𝗧</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        475 Point : 
-                        <br>    
-                        <span class="harga">Rp 70.000</span>
-                        <br>
-                        1000 Point : 
-                        <br>
-                        <span class="harga">Rp 125.000</span>
-                        <br>
-                        2050 Point : 
-                        <br>
-                        <span class="harga">Rp 225.000</span>
-                        <br>
-                        3650 Point : 
-                        <br>
-                        <span class="harga">Rp 380.500</span>
-                        <br>
-                        5350 Point : 
-                        <br>
-                        <span class="harga">Rp 550.000</span>
-                        <br>
-                        11000 Point : 
-                        <br>
-                        <span class="harga">Rp 1.060.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="https://files.catbox.moe/gsq8sd.png">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sportify">
-            <div class="link">
-                <a href="#harga-sportify">
-                        <img src="https://files.catbox.moe/06hfga.png" alt="https://files.catbox.moe/06hfga.png">
-                        <div class="judul-produk">Sportify</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-sportify">
-                <div class="popup">
-                    <h2>𝗦𝗣𝗢𝗧𝗜𝗙𝗬 𝗣𝗥𝗘𝗠𝗜𝗨𝗠</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        Spotify Prem 1b  : 
-                        <br>    
-                        <span class="harga">Rp 70.000</span>
-                        <br>
-                        Spotify Prem 3b : 
-                        <br>
-                        <span class="harga">Rp 180.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="https://files.catbox.moe/gsq8sd.png">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="viu">
-            <div class="link">
-                <a href="#harga-viu">
-                        <img src="https://files.catbox.moe/a47r5q.jpg" alt="https://files.catbox.moe/a47r5q.jpg">
-                        <div class="judul-produk">𝗩𝗜𝗨 𝗔𝗖𝗖𝗢𝗨𝗡𝗧 𝗨𝗣𝗚𝗥𝗔𝗗𝗘</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-viu">
-                <div class="popup">
-                    <h2>HARGA VIU</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        Viu Premium 1b  : 
-                        <br>    
-                        <span class="harga">Rp 45.000</span>
-                        <br>
-                        Viu Premium 3b : 
-                        <br>
-                        <span class="harga">Rp 130.000</span>
-                        <br>
-                        Viu Premium 6b : 
-                        <br>
-                        <span class="harga">Rp 250.000</span>
-                        <br>
-                        Viu Premium 1th : 
-                        <br>
-                        <span class="harga">Rp 390.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="https://files.catbox.moe/gsq8sd.png">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="vidio">
-            <div class="link">
-                <a href="#harga-vidio">
-                        <img src="https://files.catbox.moe/lwh8k8.png" alt="https://files.catbox.moe/lwh8k8.png">
-                        <div class="judul-produk">VIDIO</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-vidio">
-                <div class="popup">
-                    <h2>𝗩𝗜𝗗𝗜𝗢 𝗨𝗣𝗚𝗥𝗔𝗗𝗘 𝗔𝗖𝗖𝗢𝗨𝗡𝗧</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        1BULAN PREMIER/PLATINUM : 
-                        <br>    
-                        <span class="harga">Rp 45.000</span>
-                        <br>
-                        1TAHUN PREMIER/PLATINUM : 
-                        <br>
-                        <span class="harga">Rp 285.000</span>
-                        <br>
-                        1BULAN DIAMOND : 
-                        <br>
-                        <span class="harga">Rp 80.000</span>
-                        <br>
-                        1TAHUN DIAMOND : 
-                        <br>
-                        <span class="harga">Rp 450.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="https://files.catbox.moe/gsq8sd.png">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bigo">
-            <div class="link">
-                <a href="#harga-bigo">
-                        <img src="https://files.catbox.moe/bbx244.jpg" alt="https://files.catbox.moe/bbx244.jpg">
-                        <div class="judul-produk">Bigo Live</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-bigo">
-                <div class="popup">
-                    <h2>𝗕𝗜𝗚𝗢 𝗟𝗜𝗩𝗘</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        Produk Kosong : 
-                        <br>    
-                        <span class="harga">Tidak Tersedia</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nimo">
-            <div class="link">
-                <a href="#harga-nimo">
-                        <img src="https://files.catbox.moe/30snpo.png" alt="https://files.catbox.moe/30snpo.png">
-                        <div class="judul-produk">NIMO TV</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-nimo">
-                <div class="popup">
-                    <h2>𝗡𝗜𝗠𝗢 𝗧𝗩</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        Produk Kosong  : 
-                        <br>    
-                        <span class="harga">Tidak Tersedia</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="iqiyi">
-            <div class="link">
-                <a href="#harga-iqiyi">
-                        <img src="https://files.catbox.moe/tlgcuo.png" alt="https://files.catbox.moe/tlgcuo.png">
-                        <div class="judul-produk">IQIYI</div>
-                </a>
-            </div>
-            <div class="overlay" id="harga-iqiyi">
-                <div class="popup">
-                    <h2>𝗜𝗤𝗬𝗜 𝗨𝗣𝗚𝗥𝗔𝗗𝗘 𝗔𝗖𝗖𝗢𝗨𝗡𝗧</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                        BASIC 1 BULAN  : 
-                        <br>    
-                        <span class="harga">Rp 20.000</span>
-                        <br>
-                        BASIC 3 BULAN : 
-                        <br>
-                        <span class="harga">Rp 50.000</span>
-                        <br>
-                        BASIC 1 TAHUN : 
-                        <br>
-                        <span class="harga">Rp 160.000</span>
-                        <br>
-                        STANDAR 1 BULAN : 
-                        <br>
-                        <span class="harga">Rp 60.000</span>
-                        <br>
-                        STANDAR 3 BULAN : 
-                        <br>
-                        <span class="harga">Rp 110.000</span>
-                        <br>
-                        STANDAR 1 TAHUN  : 
-                        <br>
-                        <span class="harga">Rp 330.000</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285168827920" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">Pesan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="akunml">
-            <div class="link">
-                <a href="#akun-ml">
-                        <img src="https://files.catbox.moe/pdwba1.jpg" alt="https://files.catbox.moe/pdwba1.jpg">
-                        <div class="judul-produk">𝗔𝗸𝘂𝗻 𝗠𝗟𝗕𝗕</div>
-                </a>
-            </div>
-            <div class="overlay" id="akun-ml">
-                <div class="popup">
-                    <h2>𝗔𝗞𝗨𝗡 𝗠𝗢𝗕𝗜𝗟𝗘 𝗟𝗘𝗚𝗘𝗡𝗗</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                         : 𝗖𝗔𝗥𝗜 𝗔𝗧𝗔𝗨 𝗝𝗨𝗔𝗟 𝗔𝗞𝗨𝗡 
-                        <br>    
-                        <span class="harga">𝗕𝗶𝘀𝗮 𝗖𝗵𝗮𝘁 𝗔𝗱𝗺𝗶𝗻</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285881867694" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">𝗣𝗲𝘀𝗮𝗻 𝗦𝗲𝗸𝗮𝗿𝗮𝗻𝗴</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="akunff">
-            <div class="link">
-                <a href="#akun-ff">
-                        <img src="https://files.catbox.moe/xryx01.png" alt="https://files.catbox.moe/xryx01.png">
-                        <div class="judul-produk">𝗔𝗸𝘂𝗻 𝗙𝗙</div>
-                </a>
-            </div>
-            <div class="overlay" id="akun-ff">
-                <div class="popup">
-                    <h2>𝗔𝗞𝗨𝗡 𝗙𝗥𝗘𝗘 𝗙𝗜𝗥𝗘</h2>
-                    <a class="close" href="#populer">&times;</a>
-                    <br>
-                    <div class="content">
-                         : 𝗖𝗔𝗥𝗜 𝗔𝗧𝗔𝗨 𝗝𝗨𝗔𝗟 𝗔𝗞𝗨𝗡 
-                        <br>    
-                        <span class="harga">𝗕𝗶𝘀𝗮 𝗖𝗵𝗮𝘁 𝗔𝗱𝗺𝗶𝗻</span>
-                        <br>
-                        <a class="pesan" href="https://wa.me/6285881867694" 
-                        target="_blank" 
-                        rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt="">𝗣𝗲𝘀𝗮𝗻 𝗦𝗲𝗸𝗮𝗿𝗮𝗻𝗴</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     
-
-    <section class="tentang" id="tentang">
-        <div class="card">
-            <h1>𝗧𝗘𝗡𝗧𝗔𝗡𝗚 𝗞𝗔𝗠𝗜</h1>
-            <br>
-            <p>
-                <a href="" class="title">𝗙𝗔𝗧𝗜𝗥 𝗗𝗘𝗩𝗜𝗟𝗟𝗔𝗡 - 𝗢𝗙𝗙𝗜𝗖𝗜𝗔𝗟</a> 𝗔𝗱𝗮𝗹𝗮𝗵 𝗟𝗮𝘆𝗮𝗻𝗮𝗻 𝗦𝘁𝗼𝗿𝗲 𝗱𝗶𝗴𝗶𝘁𝗮𝗹 𝘆𝗮𝗻𝗴 𝗺𝗲𝗻𝘆𝗲𝗱𝗶𝗮𝗸𝗮𝗻 𝗯𝗲𝗯𝗲𝗿𝗮𝗽𝗮 𝗹𝗮𝘆𝗮𝗻𝗮𝗻 
-                
-                <br>
-                𝗦𝗲𝗽𝗲𝗿𝘁𝗶 𝗹𝗮𝘆𝗮𝗻𝗮𝗻 𝘀𝘁𝗿𝗲𝗮𝗺𝗶𝗻𝗴, 𝗧𝗼𝗽 𝗨𝗽 𝗚𝗮𝗺𝗲, 𝘂𝗽𝗴𝗿𝗮𝗱𝗲 𝗮𝗰𝗰𝗼𝘂𝗻𝘁 𝘀𝗽𝗼𝘁𝗶𝗳𝘆 𝘃𝗶𝗱𝗶𝗼 𝗱𝗮𝗻 𝗹𝗮𝗶𝗻 - 𝗹𝗮𝗶𝗻
-                <br>
-                
-                𝗞𝗮𝗺𝗶 𝗷𝘂𝗴𝗮 𝘀𝗲𝗱𝗶𝗮 𝗮𝗸𝘂𝗻 𝗴𝗮𝗺𝗲 𝘀𝗲𝗽𝗲𝗿𝘁𝗶 𝗮𝗸𝘂𝗻 𝗺𝗼𝗯𝗶𝗹𝗲 𝗹𝗲𝗴𝗲𝗻𝗱𝘀 & 𝗳𝗿𝗲𝗲 𝗳𝗶𝗿𝗲 
-                
-                <br>
-                𝗦𝗲𝗹𝗮𝗶𝗻 𝗶𝘁𝘂 𝗸𝗮𝗺𝗶 𝗺𝗲𝗺𝗯𝘂𝗸𝗮 𝗽𝗮𝗻𝗲𝗹 𝘂𝗻𝘁𝘂𝗸 𝗺𝗲𝗻𝗴𝗼𝗻𝗲𝗸𝘀𝗶𝗸𝗮𝗻 𝗯𝗼𝘁 (𝗮𝗶 𝗯𝘂𝗮𝘁𝗮𝗻) 𝗱𝗶 𝗽𝗲𝗿𝗮𝗻𝗴𝗸𝗮𝘁 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽 𝗱𝗲𝗻𝗴𝗮𝗻 𝗵𝗮𝗿𝗴𝗮 𝘁𝗲𝗿𝗷𝗮𝗻𝗴𝗸𝗮𝘂 𝗱𝗮𝗻 𝗸𝗮𝗺𝗶 𝗺𝗲𝗺𝗯𝘂𝗸𝗮 𝗹𝗮𝘆𝗮𝗻𝗮𝗻 𝗽𝗮𝗻𝗲𝗹 𝗷𝗮𝘀𝘁𝗲𝗯 𝗮𝘁𝗮𝘂 𝘄𝗲𝗯 𝗽𝗵𝗶𝘀𝗶𝗻𝗴
-                
-                <br>
-                𝗞𝗮𝗺𝗶 𝗯𝗲𝗿𝗱𝗶𝗿𝗶 𝘀𝗲𝗷𝗮𝗸 𝘁𝗮𝗵𝘂𝗻 𝟮𝟬𝟮𝟱 𝘆𝗮𝗻𝗴 𝗺𝗲𝗹𝗮𝘆𝗮𝗻𝗶 𝘀𝘁𝗼𝗿𝗲 𝗱𝗶𝗴𝗶𝘁𝗮𝗹
-            </p>
+    <div class="container">
+        <div class="game-grid">
+            <!-- Baris 1 -->
+            <div class="game-card" data-game="Mobile Legends">
+                <img src="https://img1.pixhost.to/images/6341/608640567_primexuu.jpg" alt="Mobile Legends" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Mobile Legends</h3>
+                    <p class="game-desc">Topup Diamond MLBB mulai dari Rp 2.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="Free Fire">
+                <img src="https://img1.pixhost.to/images/6341/608640964_primexuu.jpg" alt="Free Fire" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Free Fire</h3>
+                    <p class="game-desc">Topup Diamond FF mulai dari Rp 2.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 2 -->
+            <div class="game-card" data-game="PUBG Mobile">
+                <img src="https://img1.pixhost.to/images/6341/608641434_primexuu.jpg" alt="PUBG Mobile" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">PUBG Mobile</h3>
+                    <p class="game-desc">Topup UC mulai dari Rp 8.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="Valorant">
+                <img src="https://img1.pixhost.to/images/6341/608641827_primexuu.jpg" alt="Valorant" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-desc">Topup VP mulai dari Rp 55.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 3 -->
+            <div class="game-card" data-game="Genshin Impact">
+                <img src="https://img1.pixhost.to/images/6341/608642276_primexuu.jpg" alt="Genshin Impact" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Genshin Impact</h3>
+                    <p class="game-desc">Topup Genesin Crystal mulai dari Rp 12.500</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="Call of Duty Mobile">
+                <img src="https://img1.pixhost.to/images/6341/608642635_primexuu.jpg" alt="Call of Duty Mobile" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">COD Mobile</h3>
+                    <p class="game-desc">Topup CP mulai dari Rp 10.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 4 -->
+            <div class="game-card" data-game="EA Sports FC">
+                <img src="https://files.catbox.moe/lp9y2m.jpg" alt="FCM" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">EA Sports FC</h3>
+                    <p class="game-desc">Topup FCM mulai dari Rp 20.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="League of Legends">
+                <img src="https://img1.pixhost.to/images/6341/608643418_primexuu.jpg" alt="League of Legends" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">League of Legends : PC Game</h3>
+                    <p class="game-desc">Topup RP mulai dari Rp 60.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 5 -->
+            <div class="game-card" data-game="Fortnite">
+                <img src="https://img1.pixhost.to/images/6341/608643742_primexuu.jpg" alt="Fortnite" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Fortnite</h3>
+                    <p class="game-desc">Topup V-Bucks mulai dari Rp 260.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="HOK">
+                <img src="https://files.catbox.moe/f8nhia.jpg" alt="HOK" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Honor Of Kings</h3>
+                    <p class="game-desc">Topup HOK mulai dari Rp 2.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 6 -->
+            <div class="game-card" data-game="MCGG">
+                <img src="https://files.catbox.moe/pyua1c.jpg" alt="MCGG" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Magic Chess</h3>
+                    <p class="game-desc">Topup MCGG mulai dari Rp 2.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <div class="game-card" data-game="Wild Rift">
+                <img src="https://img1.pixhost.to/images/6341/608644865_primexuu.jpg" alt="Wild Rift" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Wild Rift</h3>
+                    <p class="game-desc">Topup Wild Cores mulai dari Rp 55.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
+            
+            <!-- Baris 7 -->
+            <div class="game-card" data-game="Roblox">
+                <img src="https://img1.pixhost.to/images/6341/608645331_primexuu.jpg" alt="Roblox" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Roblox</h3>
+                    <p class="game-desc">Topup Robux mulai dari Rp 170.000</p>
+                    <button class="btn-buy">Beli Sekarang</button>
+                </div>
+            </div>
         </div>
-    </section>
-     
-    <footer>
-        <div class="sosmed" id="kontak">
-            <h1>𝗦𝗢𝗦𝗜𝗔𝗟 𝗠𝗘𝗗𝗜𝗔</h1>
-            <a href="https://instagram.com/@maha4tir315" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/8xflwb.png" alt=""></a>
-            <a href="https://www.youtube.com/@fatirdevillan.devbase" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/gprkyq.png" alt=""></a>
-            <a href="http://wa.me/6285168827920" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/gsq8sd.png" alt=""></a>
-            <a href="https://whatsapp.com/channel/0029VawpOo5GOj9x4BedMh1c" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/ledviv.jpg" alt=""></a>
-        </div>
-    </footer>
-    <div id="copyright">
-        &copy; ® 𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆 - 𝗙𝗮𝘁𝗶𝗿 𝗗𝗲𝘃𝗶𝗹𝗹𝗮𝗻 𝗢𝗳𝗳𝗶𝗰𝗶𝗮𝗹
     </div>
+    
+    <!-- Modal -->
+    <div class="modal" id="priceModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title" id="modalGameTitle">Mobile Legends</h2>
+            
+            <div class="price-list" id="priceList">
+                <!-- Price items will be dynamically inserted here -->
+            </div>
+            
+            <button class="btn-confirm" id="confirmBtn">Konfirmasi Pembelian</button>
+        </div>
+    </div>
+    
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6285881867694" class="floating-wa" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+    
+    <footer>
+        <p class="footer-text">© 2025 FATIRTOPUP Tempat Top Up Game Termurah Di Indonesia.</p>
+    </footer>
+    
+    <script>
+        // Game data with complete prices
+        const gamePrices = {
+            "Mobile Legends": [
+                { diamond: "5 Diamond", price: "Rp 2.000" },
+                { diamond: "12 Diamond", price: "Rp 4.000" },
+                { diamond: "28 Diamond", price: "Rp 8.000" },
+                { diamond: "59 Diamond", price: "Rp 16.500" },
+                { diamond: "144 Diamond", price: "Rp 42.000" },
+                { diamond: "240 Diamond", price: "Rp 65.000" },
+                { diamond: "301 Diamond", price: "Rp 85.000" },
+                { diamond: "408 Diamond", price: "Rp 110.000" },
+                { diamond: "1X WDP", price: "Rp 30.000" },
+                { diamond: "2X WDP", price: "Rp 57.500" },
+                { diamond: "3X WDP", price: "Rp 85.000" }
+            ],
+            "Free Fire": [
+                { diamond: "5 Diamond", price: "Rp 1.000" },
+                { diamond: "12 Diamond", price: "Rp 2.000" },
+                { diamond: "50 Diamond", price: "Rp 8000" },
+                { diamond: "70 Diamond", price: "Rp 10.000" },
+                { diamond: "140 Diamond", price: "Rp 20.000" },
+                { diamond: "210 Diamond", price: "Rp 29.000" },
+                { diamond: "355 Diamond", price: "Rp 47.000" },
+                { diamond: "720 Diamond", price: "Rp 90.000" },
+                { diamond: "1000 Diamond", price: "Rp 125.000" },
+                { diamond: "2180 Diamond", price: "Rp 270.000" },
+                { diamond: "7290 Diamond", price: "Rp 900.000" },
+                { diamond: "Membership Mingguan", price: "Rp 30.000" },
+                { diamond: "Membership Bulanan", price: "Rp 100.000" }
+            ], 
+            "PUBG Mobile": [
+                { diamond: "15 UC", price: "Rp 10.000" },
+                { diamond: "125 UC", price: "Rp 50.000" },
+                { diamond: "3750 UC", price: "Rp 95.000" },
+                { diamond: "750 UC", price: "Rp 190.000" },
+                { diamond: "1250 UC", price: "Rp 300.000" },
+                { diamond: "2500 UC", price: "Rp 5250.000" }
+            ],
+            "Valorant": [
+                { diamond: "475 VP", price: "Rp 55.000" },
+                { diamond: "1000 VP", price: "Rp 115.000" },
+                { diamond: "2050 VP", price: "Rp 220.000" },
+                { diamond: "3650 VP", price: "Rp 385.000" },
+                { diamond: "5350 VP", price: "Rp 550.000" },
+                { diamond: "11000 VP", price: "Rp 1.070.000" }
+            ],
+            "Genshin Impact": [
+                { diamond: "60 GC", price: "Rp 15.000" },
+                { diamond: "300 GC", price: "Rp 75.000" },
+                { diamond: "980 GC", price: "Rp 240.000" },
+                { diamond: "1980 GC", price: "Rp 480.000" },
+                { diamond: "3280 GC", price: "Rp 800.000" },
+                { diamond: "6480 GC", price: "Rp 1.500.000" }
+            ],
+            "Call of Duty Mobile": [
+                { diamond: "40 CP", price: "Rp 10.000" },
+                { diamond: "220 CP", price: "Rp 50.000" },
+                { diamond: "440 CP", price: "Rp 100.000" },
+                { diamond: "1100 CP", price: "Rp 250.000" },
+                { diamond: "2400 CP", price: "Rp 500.000" },
+                { diamond: "4800 CP", price: "Rp 1.000.000" }
+            ],
+            "EA Sports FC": [
+                { diamond: "TIDAK TERSEDIA", price: "STOK KOSONG"}
+            ],
+            "League of Legends": [
+                { diamond: "575 RP", price: "Rp 60.000" },
+                { diamond: "1380 RP", price: "Rp 140.000" },
+                { diamond: "2800 RP", price: "Rp 280.000" },
+                { diamond: "4500 RP", price: "Rp 450.000" }, 
+                { diamond: "6500 RP", price: "Rp 600.000" }, 
+                { diamond: "13500 RP", price: "Rp 2.070.000" }
+            ],
+            "Fortnite": [
+                { diamond: "1000 V-Bucks", price: "Rp 280.000" },
+                { diamond: "2800 V-Bucks", price: "Rp 530.000" },
+                { diamond: "5000 V-Bucks", price: "Rp 850.000" }, 
+                { diamond: "13500 V-Bucks", price: "Rp 1.900.000" }
+            ],
+            "HOK": [
+                { diamond: "8 Token", price: "Rp 2.000" },
+                { diamond: "16 Token", price: "Rp 3.500" },
+                { diamond: "23 Token", price: "Rp 6.000" },
+                { diamond: "80 Token", price: "Rp 18.000" },
+                { diamond: "240 Token", price: "Rp 50.000" },
+                { diamond: "400 Token", price: "Rp 70.000" },
+                { diamond: "560 Token", price: "Rp 95.000" },
+                { diamond: "800+30 Token", price: "Rp 140.000" },
+                { diamond: "1200+45 Token", price: "Rp 230.000" },
+                { diamond: "2400+108 Token", price: "Rp 415.000" },
+                { diamond: "4000+180 Token", price: "Rp 685.000" },
+                { diamond: "8000+360 Token", price: "Rp 1.350.000" }, 
+                { diamond: "Weekly Card", price: "Rp 16.000" },
+                { diamond: "Weekly Card Plus", price: "Rp 50.000" }
+            ],
+            "MCGG": [
+                { diamond: "5 Diamonds", price: "Rp 2.000" },
+                { diamond: "12 Diamonds", price: "Rp 5.000" }, 
+                { diamond: "19 Diamonds", price: "Rp 7.000" },
+                { diamond: "28 Diamonds", price: "Rp 10.000" },
+                { diamond: "44 Diamonds", price: "Rp 15.000" },
+                { diamond: "85 Diamonds", price: "Rp 25.500" },
+                { diamond: "170 Diamonds", price: "Rp 50.000" },
+                { diamond: "240 Diamonds", price: "Rp 60.000" },
+                { diamond: "296 Diamonds", price: "Rp 85.500" },
+                { diamond: "408 Diamonds", price: "Rp 115.000" },
+                { diamond: "568 Diamonds", price: "Rp 150.000" },
+                { diamond: "875 Diamonds", price: "Rp 220.000" },
+                { diamond: "2010 Diamonds", price: "Rp 470.000" },
+                { diamond: "4830 Diamonds", price: "Rp 1.100.000" },
+                { diamond: "Weekly Card", price: "Rp 40.000" }
+            ],
+            "Wild Rift": [
+                { diamond: "425 Wild Cores", price: "Rp 55.000" },
+                { diamond: "1000 Wild Cores", price: "Rp 135.000" },
+                { diamond: "1850 Wild Cores", price: "Rp 230.000" },
+                { diamond: "3275 Wild Cores", price: "Rp 380.000" },
+                { diamond: "4800 Wild Cores", price: "Rp 550.000" },
+                { diamond: "10000 Wild Cores", price: "Rp 1.090.000" }
+            ],
+            "Roblox": [
+                { diamond: "800 Robux", price: "Rp 170.000" },
+                { diamond: "2000 Robux", price: "Rp 425.000" },
+                { diamond: "4500 Robux", price: "Rp 800.000" }
+                { diamond: "10000 Robux", price: "Rp 1.700.000" }, 
+                { diamond: "Roblox Gift Card ID 100K", price: "Rp 110.000" },
+                { diamond: "Roblox Gift Card ID 300K", price: "Rp 300.000" },
+                { diamond: "Roblox Gift Card ID 500K", price: "Rp 500.000" },
+                { diamond: "Roblox USD 25 GLOBAL", price: "Rp 400.000" },
+                { diamond: "Roblox USD 150 GLOBAL", price: "Rp 2.400.000" }
+            ]
+        };
+        
+        // DOM elements
+        const modal = document.getElementById('priceModal');
+        const modalTitle = document.getElementById('modalGameTitle');
+        const priceList = document.getElementById('priceList');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const closeModal = document.querySelector('.close-modal');
+        const gameCards = document.querySelectorAll('.game-card');
+        const waBtn = document.querySelector('.floating-wa');
+        
+        // Selected item
+        let selectedGame = '';
+        let selectedItem = null;
+        
+        // Open modal when game card is clicked
+        gameCards.forEach(card => {
+            card.addEventListener('click', function() {
+                selectedGame = this.getAttribute('data-game');
+                modalTitle.textContent = selectedGame;
+                
+                // Clear previous items
+                priceList.innerHTML = '';
+                
+                // Add price items
+                gamePrices[selectedGame].forEach((item, index) => {
+                    const priceItem = document.createElement('div');
+                    priceItem.className = 'price-item';
+                    priceItem.innerHTML = `
+                        <div class="diamond-amount">${item.diamond}</div>
+                        <div class="price-amount">${item.price}</div>
+                    `;
+                    
+                    priceItem.addEventListener('click', function() {
+                        // Remove active class from all items
+                        document.querySelectorAll('.price-item').forEach(el => {
+                            el.style.background = 'rgba(255, 255, 255, 0.05)';
+                            el.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                        });
+                        
+                        // Add active class to selected item
+                        this.style.background = 'rgba(255, 152, 0, 0.2)';
+                        this.style.borderColor = 'var(--accent)';
+                        
+                        selectedItem = {
+                            game: selectedGame,
+                            diamond: item.diamond,
+                            price: item.price
+                        };
+                    });
+                    
+                    priceList.appendChild(priceItem);
+                });
+                
+                modal.classList.add('active');
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            selectedItem = null;
+        });
+        
+        // Confirm purchase
+        confirmBtn.addEventListener('click', function() {
+            if (!selectedItem) {
+                alert('Silakan pilih item terlebih dahulu');
+                return;
+            }
+            
+            const whatsappNumber = '6285881867694'; // Ganti dengan nomor WhatsApp Anda
+            const message = `Halo, saya ingin membeli topup game:\n\nGame: ${selectedItem.game}\nItem: ${selectedItem.diamond}\nHarga: ${selectedItem.price}\n\nSilakan proses pesanan saya.`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+            
+            modal.classList.remove('active');
+            selectedItem = null;
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.classList.remove('active');
+                selectedItem = null;
+            }
+        });
+    </script>
 </body>
     </html>
