@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tempat TopUp Game Teraman</title>
-    <title>FATIRTOPUP - Tempat Topup Game Termurah</title>
-    <link rel="icon" href="https://h.top4top.io/p_33363xa4j0.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   FATIRTOPUP - Tempat Topup Game Termurah
+  </title>
+  <link href="https://h.top4top.io/p_33363xa4j0.jpg" rel="icon"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   :root {
             --primary: #6a1b9a;
             --secondary: #9c27b0;
             --accent: #ff9800;
             --dark: #1a1a2e;
             --light: #f8f9fa;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
             background-color: var(--dark);
             color: var(--light);
             overflow-x: hidden;
         }
-        
+
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 1.5rem;
@@ -37,7 +41,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: "";
             position: absolute;
@@ -45,15 +49,20 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
             animation: pulse 8s infinite linear;
         }
-        
+
         @keyframes pulse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .logo {
             font-size: 2.5rem;
             font-weight: 700;
@@ -65,26 +74,20 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .tagline {
             font-size: 1rem;
             opacity: 0.9;
             position: relative;
             z-index: 2;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
+
         .game-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
-        
+
         .game-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -95,13 +98,13 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .game-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
             border-color: var(--accent);
         }
-        
+
         .game-card::after {
             content: "";
             position: absolute;
@@ -109,37 +112,37 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(106,27,154,0.3), rgba(156,39,176,0.3));
+            background: linear-gradient(135deg, rgba(106, 27, 154, 0.3), rgba(156, 39, 176, 0.3));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .game-card:hover::after {
             opacity: 1;
         }
-        
+
         .game-image {
             width: 100%;
             height: 150px;
             object-fit: cover;
         }
-        
+
         .game-info {
             padding: 1.2rem;
         }
-        
+
         .game-title {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
             color: white;
         }
-        
+
         .game-desc {
             font-size: 0.9rem;
             opacity: 0.7;
             margin-bottom: 1rem;
         }
-        
+
         .btn-buy {
             display: inline-block;
             background: linear-gradient(to right, var(--accent), #ffc107);
@@ -152,12 +155,12 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn-buy:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
         }
-        
+
         .modal {
             display: none;
             position: fixed;
@@ -172,12 +175,12 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .modal.active {
             display: flex;
             opacity: 1;
         }
-        
+
         .modal-content {
             background: linear-gradient(145deg, #1e1e3a, #2a2a4a);
             border-radius: 15px;
@@ -192,11 +195,11 @@
             transition: transform 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .modal.active .modal-content {
             transform: translateY(0);
         }
-        
+
         .close-modal {
             position: absolute;
             top: 15px;
@@ -206,24 +209,24 @@
             color: rgba(255, 255, 255, 0.6);
             transition: color 0.3s ease;
         }
-        
+
         .close-modal:hover {
             color: var(--accent);
         }
-        
+
         .modal-title {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             color: var(--accent);
             text-align: center;
         }
-        
+
         .price-list {
             display: grid;
             grid-template-columns: 1fr;
             gap: 0.8rem;
         }
-        
+
         .price-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
@@ -233,22 +236,23 @@
             align-items: center;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
         }
-        
+
         .price-item:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--accent);
         }
-        
+
         .diamond-amount {
             font-weight: 600;
         }
-        
+
         .price-amount {
             color: var(--accent);
             font-weight: 700;
         }
-        
+
         .btn-confirm {
             display: block;
             width: 100%;
@@ -263,17 +267,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .btn-confirm:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(106, 27, 154, 0.5);
         }
-        
+
         .floating-wa {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: #25D366;
+            background: #25d366;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -285,203 +289,405 @@
             animation: float 3s ease-in-out infinite;
             transition: all 0.3s ease;
         }
-        
+
         .floating-wa:hover {
             transform: scale(1.1);
         }
-        
+
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
-        
+
         .floating-wa img {
             width: 35px;
             height: 35px;
         }
-        
+
         footer {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 2rem;
             text-align: center;
             margin-top: 3rem;
         }
-        
+
         .footer-text {
             opacity: 0.8;
             font-size: 0.9rem;
         }
-        
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .error-text {
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            margin-top: -0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
         @media (max-width: 768px) {
             .game-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .logo {
                 font-size: 2rem;
             }
         }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo">FATIRTOPUP</div>
-        <div class="tagline">Topup Game Termurah, Aman & Tercepat di Indonesia</div>
-    </header>
-    
-    <div class="container">
-        <div class="game-grid">
-            <!-- Baris 1 -->
-            <div class="game-card" data-game="Mobile Legends">
-                <img src="https://img1.pixhost.to/images/6341/608640567_primexuu.jpg" alt="Mobile Legends" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Mobile Legends</h3>
-                    <p class="game-desc">Topup Diamond MLBB mulai dari Rp 2.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="Free Fire">
-                <img src="https://img1.pixhost.to/images/6341/608640964_primexuu.jpg" alt="Free Fire" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Free Fire</h3>
-                    <p class="game-desc">Topup Diamond FF mulai dari Rp 2.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 2 -->
-            <div class="game-card" data-game="PUBG Mobile">
-                <img src="https://img1.pixhost.to/images/6341/608641434_primexuu.jpg" alt="PUBG Mobile" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">PUBG Mobile</h3>
-                    <p class="game-desc">Topup UC mulai dari Rp 8.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="Valorant">
-                <img src="https://img1.pixhost.to/images/6341/608641827_primexuu.jpg" alt="Valorant" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Valorant</h3>
-                    <p class="game-desc">Topup VP mulai dari Rp 55.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 3 -->
-            <div class="game-card" data-game="Genshin Impact">
-                <img src="https://img1.pixhost.to/images/6341/608642276_primexuu.jpg" alt="Genshin Impact" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Genshin Impact</h3>
-                    <p class="game-desc">Topup Genesin Crystal mulai dari Rp 12.500</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="Call of Duty Mobile">
-                <img src="https://img1.pixhost.to/images/6341/608642635_primexuu.jpg" alt="Call of Duty Mobile" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">COD Mobile</h3>
-                    <p class="game-desc">Topup CP mulai dari Rp 10.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 4 -->
-            <div class="game-card" data-game="EA Sports FC">
-                <img src="https://files.catbox.moe/lp9y2m.jpg" alt="FCM" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">EA Sports FC</h3>
-                    <p class="game-desc">Topup FCM mulai dari Rp 20.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="League of Legends">
-                <img src="https://img1.pixhost.to/images/6341/608643418_primexuu.jpg" alt="League of Legends" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">League of Legends : PC Game</h3>
-                    <p class="game-desc">Topup RP mulai dari Rp 60.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 5 -->
-            <div class="game-card" data-game="Fortnite">
-                <img src="https://img1.pixhost.to/images/6341/608643742_primexuu.jpg" alt="Fortnite" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Fortnite</h3>
-                    <p class="game-desc">Topup V-Bucks mulai dari Rp 260.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="HOK">
-                <img src="https://files.catbox.moe/f8nhia.jpg" alt="HOK" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Honor Of Kings</h3>
-                    <p class="game-desc">Topup HOK mulai dari Rp 2.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 6 -->
-            <div class="game-card" data-game="MCGG">
-                <img src="https://files.catbox.moe/pyua1c.jpg" alt="MCGG" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Magic Chess</h3>
-                    <p class="game-desc">Topup MCGG mulai dari Rp 2.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <div class="game-card" data-game="Wild Rift">
-                <img src="https://img1.pixhost.to/images/6341/608644865_primexuu.jpg" alt="Wild Rift" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Wild Rift</h3>
-                    <p class="game-desc">Topup Wild Cores mulai dari Rp 55.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-            
-            <!-- Baris 7 -->
-            <div class="game-card" data-game="Roblox">
-                <img src="https://img1.pixhost.to/images/6341/608645331_primexuu.jpg" alt="Roblox" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Roblox</h3>
-                    <p class="game-desc">Topup Robux mulai dari Rp 170.000</p>
-                    <button class="btn-buy">Beli Sekarang</button>
-                </div>
-            </div>
-        </div>
+  </style>
+ </head>
+ <body>
+  <header>
+   <div class="logo">
+    FATIRTOPUP
+   </div>
+   <div class="tagline">
+    Topup Game Termurah, Aman &amp; Tercepat di Indonesia
+   </div>
+  </header>
+  <!-- Feature Banner Slide -->
+  <div class="relative w-full max-w-6xl mx-auto mt-6 overflow-hidden rounded-lg shadow-lg">
+   <div class="flex transition-transform duration-700 ease-in-out" id="bannerSlides">
+    <div class="min-w-full relative">
+     <img alt="Promo banner showing Mobile Legends topup discount 50 percent with colorful game-themed background" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/gq2gk2.jpg" width="1200"/>
+     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-purple-700/80 to-pink-600/80 p-4 rounded-md max-w-xs">
+      <h2 class="text-white text-2xl font-bold mb-1">
+       Diskon 50% Topup Mobile Legends
+      </h2>
+      <p class="text-white text-sm">
+       Nikmati harga termurah untuk diamond MLBB sekarang!
+      </p>
+     </div>
     </div>
-    
-    <!-- Modal -->
-    <div class="modal" id="priceModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title" id="modalGameTitle">Mobile Legends</h2>
-            
-            <div class="price-list" id="priceList">
-                <!-- Price items will be dynamically inserted here -->
-            </div>
-            
-            <button class="btn-confirm" id="confirmBtn">Konfirmasi Pembelian</button>
-        </div>
+    <div class="min-w-full relative">
+     <img alt="Promo banner showing Free Fire topup cheapest and trusted service with dynamic fire and game elements" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/9jl63o.jpg" width="1200"/>
+     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-orange-700/80 to-yellow-500/80 p-4 rounded-md max-w-xs">
+      <h2 class="text-white text-2xl font-bold mb-1">
+       Topup Free Fire Termurah
+      </h2>
+      <p class="text-white text-sm">
+       Dapatkan diamond FF dengan harga terbaik dan aman.
+      </p>
+     </div>
     </div>
-    
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6285881867694" class="floating-wa" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-    
-    <footer>
-        <p class="footer-text">© 2025 FATIRTOPUP Tempat Top Up Game Termurah Di Indonesia.</p>
-    </footer>
-    
-    <script>
+    <div class="min-w-full relative">
+     <img alt="Promo banner showing PUBG Mobile UC bonus special offer with vibrant battle royale theme" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/38htpu.jpg" width="1200"/>
+     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-blue-800/80 to-cyan-600/80 p-4 rounded-md max-w-xs">
+      <h2 class="text-white text-2xl font-bold mb-1">
+       Bonus UC Spesial PUBG Mobile
+      </h2>
+      <p class="text-white text-sm">
+       Topup UC dan dapatkan bonus menarik setiap pembelian.
+      </p>
+     </div>
+    </div>
+   </div>
+   <button aria-label="Previous Slide" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white rounded-full p-2 focus:outline-none" id="prevBtn">
+    <i class="fas fa-chevron-left">
+    </i>
+   </button>
+   <button aria-label="Next Slide" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white rounded-full p-2 focus:outline-none" id="nextBtn">
+    <i class="fas fa-chevron-right">
+    </i>
+   </button>
+  </div>
+  <div class="container max-w-6xl mx-auto mt-8 px-4">
+   <div class="game-grid">
+    <!-- Baris 1 -->
+    <div class="game-card" data-game="Mobile Legends">
+     <img alt="Mobile Legends game character battle scene with vibrant colors and fantasy background" class="game-image" src="https://img1.pixhost.to/images/6341/608640567_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Mobile Legends
+      </h3>
+      <p class="game-desc">
+       Topup Diamond MLBB mulai dari Rp 2.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="Free Fire">
+     <img alt="Free Fire game characters in action with explosive background and dynamic lighting" class="game-image" src="https://img1.pixhost.to/images/6341/608640964_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Free Fire
+      </h3>
+      <p class="game-desc">
+       Topup Diamond FF mulai dari Rp 2.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 2 -->
+    <div class="game-card" data-game="PUBG Mobile">
+     <img alt="PUBG Mobile intense battle scene with soldiers and helicopters in a warzone" class="game-image" src="https://img1.pixhost.to/images/6341/608641434_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       PUBG Mobile
+      </h3>
+      <p class="game-desc">
+       Topup UC mulai dari Rp 8.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="Valorant">
+     <img alt="Valorant game agents in tactical combat with futuristic weapons and neon lights" class="game-image" src="https://img1.pixhost.to/images/6341/608641827_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Valorant
+      </h3>
+      <p class="game-desc">
+       Topup VP mulai dari Rp 55.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 3 -->
+    <div class="game-card" data-game="Genshin Impact">
+     <img alt="Genshin Impact fantasy open world with characters and magical elements" class="game-image" src="https://img1.pixhost.to/images/6341/608642276_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Genshin Impact
+      </h3>
+      <p class="game-desc">
+       Topup Genesin Crystal mulai dari Rp 12.500
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="Call of Duty Mobile">
+     <img alt="Call of Duty Mobile intense military combat with soldiers and explosions" class="game-image" src="https://img1.pixhost.to/images/6341/608642635_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       COD Mobile
+      </h3>
+      <p class="game-desc">
+       Topup CP mulai dari Rp 10.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 4 -->
+    <div class="game-card" data-game="EA Sports FC">
+     <img alt="EA Sports FC football game logo with dynamic stadium background" class="game-image" src="https://files.catbox.moe/lp9y2m.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       EA Sports FC
+      </h3>
+      <p class="game-desc">
+       Topup FCM mulai dari Rp 20.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="League of Legends">
+     <img alt="League of Legends PC game champions in battle with magical effects" class="game-image" src="https://img1.pixhost.to/images/6341/608643418_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       League of Legends : PC Game
+      </h3>
+      <p class="game-desc">
+       Topup RP mulai dari Rp 60.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 5 -->
+    <div class="game-card" data-game="Fortnite">
+     <img alt="Fortnite colorful battle royale characters with vibrant background" class="game-image" src="https://img1.pixhost.to/images/6341/608643742_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Fortnite
+      </h3>
+      <p class="game-desc">
+       Topup V-Bucks mulai dari Rp 260.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="HOK">
+     <img alt="Honor Of Kings game characters in epic battle with fantasy background" class="game-image" src="https://files.catbox.moe/f8nhia.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Honor Of Kings
+      </h3>
+      <p class="game-desc">
+       Topup HOK mulai dari Rp 2.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 6 -->
+    <div class="game-card" data-game="MCGG">
+     <img alt="Magic Chess game board with fantasy chess pieces and magical effects" class="game-image" src="https://files.catbox.moe/pyua1c.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Magic Chess
+      </h3>
+      <p class="game-desc">
+       Topup MCGG mulai dari Rp 2.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <div class="game-card" data-game="Wild Rift">
+     <img alt="Wild Rift game champions in action with dynamic fantasy background" class="game-image" src="https://img1.pixhost.to/images/6341/608644865_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Wild Rift
+      </h3>
+      <p class="game-desc">
+       Topup Wild Cores mulai dari Rp 55.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+    <!-- Baris 7 -->
+    <div class="game-card" data-game="Roblox">
+     <img alt="Roblox game characters in colorful blocky world with creative elements" class="game-image" src="https://img1.pixhost.to/images/6341/608645331_primexuu.jpg"/>
+     <div class="game-info">
+      <h3 class="game-title">
+       Roblox
+      </h3>
+      <p class="game-desc">
+       Topup Robux mulai dari Rp 170.000
+      </p>
+      <button class="btn-buy">
+       Beli Sekarang
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- Modal -->
+  <div aria-labelledby="modalGameTitle" aria-modal="true" class="modal" id="priceModal" role="dialog">
+   <div class="modal-content">
+    <button aria-label="Close modal" class="close-modal">
+     ×
+    </button>
+    <h2 class="modal-title" id="modalGameTitle">
+     Mobile Legends
+    </h2>
+    <form id="orderForm" novalidate>
+     <div id="inputFieldsContainer">
+      <!-- Dynamic input fields will be inserted here -->
+     </div>
+     <div class="price-list" id="priceList">
+     </div>
+     <button class="btn-confirm" id="confirmBtn" type="submit">
+      Konfirmasi Pembelian
+     </button>
+    </form>
+   </div>
+  </div>
+  <!-- Floating WhatsApp -->
+  <a aria-label="Chat on WhatsApp" class="floating-wa" href="https://wa.me/6285881867694" rel="noopener noreferrer" target="_blank">
+   <img alt="WhatsApp logo green icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
+  </a>
+  <footer>
+   <p class="footer-text">
+    © 2025 FATIRTOPUP Tempat Top Up Game Termurah Di Indonesia.
+   </p>
+  </footer>
+  <script>
+   // Banner Slide Logic
+        const bannerSlides = document.getElementById('bannerSlides');
+        const slidesCount = bannerSlides.children.length;
+        let currentIndex = 0;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateSlidePosition() {
+            bannerSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slidesCount;
+            updateSlidePosition();
+        }
+
+        function showPrevSlide() {
+            currentIndex = (currentIndex - 1 + slidesCount) % slidesCount;
+            updateSlidePosition();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            showNextSlide();
+            resetAutoSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            showPrevSlide();
+            resetAutoSlide();
+        });
+
+        let autoSlideInterval = setInterval(showNextSlide, 5000);
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(showNextSlide, 5000);
+        }
+
         // Game data with complete prices
         const gamePrices = {
             "Mobile Legends": [
@@ -511,7 +717,7 @@
                 { diamond: "7290 Diamond", price: "Rp 900.000" },
                 { diamond: "Membership Mingguan", price: "Rp 30.000" },
                 { diamond: "Membership Bulanan", price: "Rp 100.000" }
-            ], 
+            ],
             "PUBG Mobile": [
                 { diamond: "15 UC", price: "Rp 10.000" },
                 { diamond: "125 UC", price: "Rp 50.000" },
@@ -545,20 +751,20 @@
                 { diamond: "4800 CP", price: "Rp 1.000.000" }
             ],
             "EA Sports FC": [
-                { diamond: "TIDAK TERSEDIA", price: "STOK KOSONG"}
+                { diamond: "TIDAK TERSEDIA", price: "STOK KOSONG" }
             ],
             "League of Legends": [
                 { diamond: "575 RP", price: "Rp 60.000" },
                 { diamond: "1380 RP", price: "Rp 140.000" },
                 { diamond: "2800 RP", price: "Rp 280.000" },
-                { diamond: "4500 RP", price: "Rp 450.000" }, 
-                { diamond: "6500 RP", price: "Rp 600.000" }, 
+                { diamond: "4500 RP", price: "Rp 450.000" },
+                { diamond: "6500 RP", price: "Rp 600.000" },
                 { diamond: "13500 RP", price: "Rp 2.070.000" }
             ],
             "Fortnite": [
                 { diamond: "1000 V-Bucks", price: "Rp 280.000" },
                 { diamond: "2800 V-Bucks", price: "Rp 530.000" },
-                { diamond: "5000 V-Bucks", price: "Rp 850.000" }, 
+                { diamond: "5000 V-Bucks", price: "Rp 850.000" },
                 { diamond: "13500 V-Bucks", price: "Rp 1.900.000" }
             ],
             "HOK": [
@@ -573,13 +779,13 @@
                 { diamond: "1200+45 Token", price: "Rp 230.000" },
                 { diamond: "2400+108 Token", price: "Rp 415.000" },
                 { diamond: "4000+180 Token", price: "Rp 685.000" },
-                { diamond: "8000+360 Token", price: "Rp 1.350.000" }, 
+                { diamond: "8000+360 Token", price: "Rp 1.350.000" },
                 { diamond: "Weekly Card", price: "Rp 16.000" },
                 { diamond: "Weekly Card Plus", price: "Rp 50.000" }
             ],
             "MCGG": [
                 { diamond: "5 Diamonds", price: "Rp 2.000" },
-                { diamond: "12 Diamonds", price: "Rp 5.000" }, 
+                { diamond: "12 Diamonds", price: "Rp 5.000" },
                 { diamond: "19 Diamonds", price: "Rp 7.000" },
                 { diamond: "28 Diamonds", price: "Rp 10.000" },
                 { diamond: "44 Diamonds", price: "Rp 15.000" },
@@ -605,8 +811,8 @@
             "Roblox": [
                 { diamond: "800 Robux", price: "Rp 170.000" },
                 { diamond: "2000 Robux", price: "Rp 425.000" },
-                { diamond: "4500 Robux", price: "Rp 800.000" }, 
-                { diamond: "10000 Robux", price: "Rp 1.700.000" }, 
+                { diamond: "4500 Robux", price: "Rp 800.000" },
+                { diamond: "10000 Robux", price: "Rp 1.700.000" },
                 { diamond: "Roblox Gift Card ID 100K", price: "Rp 110.000" },
                 { diamond: "Roblox Gift Card ID 300K", price: "Rp 300.000" },
                 { diamond: "Roblox Gift Card ID 500K", price: "Rp 500.000" },
@@ -614,7 +820,7 @@
                 { diamond: "Roblox USD 150 GLOBAL", price: "Rp 2.400.000" }
             ]
         };
-        
+
         // DOM elements
         const modal = document.getElementById('priceModal');
         const modalTitle = document.getElementById('modalGameTitle');
@@ -622,85 +828,165 @@
         const confirmBtn = document.getElementById('confirmBtn');
         const closeModal = document.querySelector('.close-modal');
         const gameCards = document.querySelectorAll('.game-card');
-        const waBtn = document.querySelector('.floating-wa');
-        
+        const inputFieldsContainer = document.getElementById('inputFieldsContainer');
+        const orderForm = document.getElementById('orderForm');
+
         // Selected item
         let selectedGame = '';
         let selectedItem = null;
-        
+
+        // Function to create input field
+        function createInputField(id, label, placeholder, required = true) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'input-group';
+
+            const labelEl = document.createElement('label');
+            labelEl.className = 'input-label';
+            labelEl.setAttribute('for', id);
+            labelEl.textContent = label;
+
+            const inputEl = document.createElement('input');
+            inputEl.className = 'input-field';
+            inputEl.type = 'text';
+            inputEl.id = id;
+            inputEl.name = id;
+            inputEl.placeholder = placeholder;
+            if (required) inputEl.required = true;
+
+            wrapper.appendChild(labelEl);
+            wrapper.appendChild(inputEl);
+
+            return wrapper;
+        }
+
+        // Function to clear input fields
+        function clearInputFields() {
+            inputFieldsContainer.innerHTML = '';
+        }
+
         // Open modal when game card is clicked
         gameCards.forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 selectedGame = this.getAttribute('data-game');
                 modalTitle.textContent = selectedGame;
-                
-                // Clear previous items
+
+                // Clear previous items and inputs
                 priceList.innerHTML = '';
-                
+                clearInputFields();
+                selectedItem = null;
+
                 // Add price items
-                gamePrices[selectedGame].forEach((item, index) => {
-                    const priceItem = document.createElement('div');
-                    priceItem.className = 'price-item';
-                    priceItem.innerHTML = `
-                        <div class="diamond-amount">${item.diamond}</div>
-                        <div class="price-amount">${item.price}</div>
-                    `;
-                    
-                    priceItem.addEventListener('click', function() {
-                        // Remove active class from all items
-                        document.querySelectorAll('.price-item').forEach(el => {
-                            el.style.background = 'rgba(255, 255, 255, 0.05)';
-                            el.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                if (gamePrices[selectedGame]) {
+                    gamePrices[selectedGame].forEach((item, index) => {
+                        const priceItem = document.createElement('div');
+                        priceItem.className = 'price-item';
+                        priceItem.innerHTML = `
+                            <div class="diamond-amount">${item.diamond}</div>
+                            <div class="price-amount">${item.price}</div>
+                        `;
+
+                        priceItem.addEventListener('click', function () {
+                            // Remove active style from all items
+                            document.querySelectorAll('.price-item').forEach(el => {
+                                el.style.background = 'rgba(255, 255, 255, 0.05)';
+                                el.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                            });
+
+                            // Add active style to selected item
+                            this.style.background = 'rgba(255, 152, 0, 0.2)';
+                            this.style.borderColor = 'var(--accent)';
+
+                            selectedItem = {
+                                game: selectedGame,
+                                diamond: item.diamond,
+                                price: item.price
+                            };
                         });
-                        
-                        // Add active class to selected item
-                        this.style.background = 'rgba(255, 152, 0, 0.2)';
-                        this.style.borderColor = 'var(--accent)';
-                        
-                        selectedItem = {
-                            game: selectedGame,
-                            diamond: item.diamond,
-                            price: item.price
-                        };
+
+                        priceList.appendChild(priceItem);
                     });
-                    
-                    priceList.appendChild(priceItem);
-                });
-                
+                } else {
+                    priceList.innerHTML = '<p class="text-center text-gray-400">Harga tidak tersedia.</p>';
+                }
+
+                // Add input fields based on game
+                if (selectedGame === "Mobile Legends") {
+                    // Mobile Legends: ID and Server
+                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
+                    inputFieldsContainer.appendChild(createInputField('server', 'Server', 'Masukkan Server Anda'));
+                } else if (selectedGame === "Free Fire") {
+                    // Free Fire: ID only
+                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
+                } else {
+                    // Other games except Mobile Legends: ID only
+                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
+                }
+
                 modal.classList.add('active');
             });
         });
-        
+
         // Close modal
-        closeModal.addEventListener('click', function() {
+        closeModal.addEventListener('click', function () {
             modal.classList.remove('active');
             selectedItem = null;
+            orderForm.reset();
         });
-        
+
         // Confirm purchase
-        confirmBtn.addEventListener('click', function() {
+        orderForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
             if (!selectedItem) {
                 alert('Silakan pilih item terlebih dahulu');
                 return;
             }
-            
+
+            // Validate inputs
+            const userIdInput = orderForm.querySelector('#userId');
+            const serverInput = orderForm.querySelector('#server');
+
+            if (!userIdInput || userIdInput.value.trim() === '') {
+                alert('Silakan masukkan ID Game Anda');
+                userIdInput?.focus();
+                return;
+            }
+
+            if (selectedGame === "Mobile Legends") {
+                if (!serverInput || serverInput.value.trim() === '') {
+                    alert('Silakan masukkan Server Anda');
+                    serverInput?.focus();
+                    return;
+                }
+            }
+
             const whatsappNumber = '6285881867694'; // Ganti dengan nomor WhatsApp Anda
-            const message = `Halo, saya ingin membeli topup game:\n\nGame: ${selectedItem.game}\nItem: ${selectedItem.diamond}\nHarga: ${selectedItem.price}\n\nSilakan proses pesanan saya.`;
+
+            let message = `Halo, saya ingin membeli topup game:\n\nID Game: ${userIdInput.value.trim()}\nGame: ${selectedItem.game}\nItem: ${selectedItem.diamond}\nHarga: ${selectedItem.price}`;
+
+            if (selectedGame === "Mobile Legends") {
+                message += `\nServer: ${serverInput.value.trim()}`;
+            }
+
+            message += `\n\nSilakan proses pesanan saya.`;
+
             const encodedMessage = encodeURIComponent(message);
-            
+
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-            
+
             modal.classList.remove('active');
             selectedItem = null;
+            orderForm.reset();
         });
-        
+
         // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             if (event.target === modal) {
                 modal.classList.remove('active');
                 selectedItem = null;
+                orderForm.reset();
             }
         });
-    </script>
-</body>
-                        </html>
+  </script>
+ </body>
+</html>
