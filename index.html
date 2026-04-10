@@ -142,6 +142,14 @@
             opacity: 0.7;
             margin-bottom: 1rem;
         }
+        
+        .game-card {
+    pointer-events: auto;
+        }
+.btn-buy {
+    position: relative;
+    z-index: 10;
+}
 
         .btn-buy {
             display: inline-block;
@@ -368,6 +376,33 @@
             .logo {
                 font-size: 2rem;
             }
+            
+            .payment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.payment-item {
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.payment-item:hover {
+  border-color: var(--accent);
+  background: rgba(255,152,0,0.15);
+}
+
+.payment-item.active {
+  background: rgba(255,152,0,0.25);
+  border-color: var(--accent);
+}
         }
   </style>
  </head>
@@ -381,51 +416,37 @@
    </div>
   </header>
   <!-- Feature Banner Slide -->
-  <div class="relative w-full max-w-6xl mx-auto mt-6 overflow-hidden rounded-lg shadow-lg">
-   <div class="flex transition-transform duration-700 ease-in-out" id="bannerSlides">
-    <div class="min-w-full relative">
-     <img alt="Promo banner showing Mobile Legends topup discount 50 percent with colorful game-themed background" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/gq2gk2.jpg" width="1200"/>
-     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-purple-700/80 to-pink-600/80 p-4 rounded-md max-w-xs">
-      <h2 class="text-white text-2xl font-bold mb-1">
-       Diskon 50% Topup Mobile Legends
-      </h2>
-      <p class="text-white text-sm">
-       Nikmati harga termurah untuk diamond MLBB sekarang!
-      </p>
-     </div>
+<!-- YANG BERUBAH CUMA BAGIAN INI AJA, SISANYA SAMA -->
+
+<<!-- ===== SLIDER FIX ===== -->
+<div class="relative max-w-6xl mx-auto mt-6 px-4 overflow-hidden">
+
+  <div id="bannerSlides" class="flex transition-transform duration-700 ease-in-out">
+    
+    <div class="min-w-full">
+      <img class="w-full h-64 sm:h-96 object-cover rounded-lg" src="https://files.catbox.moe/gq2gk2.jpg"/>
     </div>
-    <div class="min-w-full relative">
-     <img alt="Promo banner showing Free Fire topup cheapest and trusted service with dynamic fire and game elements" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/9jl63o.jpg" width="1200"/>
-     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-orange-700/80 to-yellow-500/80 p-4 rounded-md max-w-xs">
-      <h2 class="text-white text-2xl font-bold mb-1">
-       Topup Free Fire Termurah
-      </h2>
-      <p class="text-white text-sm">
-       Dapatkan diamond FF dengan harga terbaik dan aman.
-      </p>
-     </div>
+
+    <div class="min-w-full">
+      <img class="w-full h-64 sm:h-96 object-cover rounded-lg" src="https://files.catbox.moe/9jl63o.jpg"/>
     </div>
-    <div class="min-w-full relative">
-     <img alt="Promo banner showing PUBG Mobile UC bonus special offer with vibrant battle royale theme" class="w-full h-64 sm:h-96 object-cover rounded-lg" height="400" src="https://files.catbox.moe/38htpu.jpg" width="1200"/>
-     <div class="absolute bottom-6 left-6 bg-gradient-to-r from-blue-800/80 to-cyan-600/80 p-4 rounded-md max-w-xs">
-      <h2 class="text-white text-2xl font-bold mb-1">
-       Bonus UC Spesial PUBG Mobile
-      </h2>
-      <p class="text-white text-sm">
-       Topup UC dan dapatkan bonus menarik setiap pembelian.
-      </p>
-     </div>
+
+    <div class="min-w-full">
+      <img class="w-full h-64 sm:h-96 object-cover rounded-lg" src="https://files.catbox.moe/38htpu.jpg"/>
     </div>
-   </div>
-   <button aria-label="Previous Slide" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white rounded-full p-2 focus:outline-none" id="prevBtn">
-    <i class="fas fa-chevron-left">
-    </i>
-   </button>
-   <button aria-label="Next Slide" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white rounded-full p-2 focus:outline-none" id="nextBtn">
-    <i class="fas fa-chevron-right">
-    </i>
-   </button>
+
   </div>
+
+  <!-- BUTTON -->
+  <button id="prevBtn" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <button id="nextBtn" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+</div>
   <div class="container max-w-6xl mx-auto mt-8 px-4">
    <div class="game-grid">
     <!-- Baris 1 -->
@@ -634,6 +655,16 @@
      </div>
      <div class="price-list" id="priceList">
      </div>
+     <div class="input-group">
+  <label class="input-label">Metode Pembayaran</label>
+  <div class="payment-grid">
+    
+    <div class="payment-item" data-value="QRIS">QRIS</div>
+    <div class="payment-item" data-value="085797279360">DANA</div>
+<div class="payment-item" data-value="085881867694">GoPay</div>
+
+  </div>
+</div>
      <button class="btn-confirm" id="confirmBtn" type="submit">
       Konfirmasi Pembelian
      </button>
@@ -823,170 +854,117 @@
 
         // DOM elements
         const modal = document.getElementById('priceModal');
-        const modalTitle = document.getElementById('modalGameTitle');
-        const priceList = document.getElementById('priceList');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const closeModal = document.querySelector('.close-modal');
-        const gameCards = document.querySelectorAll('.game-card');
-        const inputFieldsContainer = document.getElementById('inputFieldsContainer');
-        const orderForm = document.getElementById('orderForm');
+const modalTitle = document.getElementById('modalGameTitle');
+const priceList = document.getElementById('priceList');
+const gameCards = document.querySelectorAll('.game-card');
+const inputFieldsContainer = document.getElementById('inputFieldsContainer');
+const orderForm = document.getElementById('orderForm');
 
-        // Selected item
-        let selectedGame = '';
-        let selectedItem = null;
+let selectedGame = '';
+let selectedItem = null;
 
-        // Function to create input field
-        function createInputField(id, label, placeholder, required = true) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'input-group';
 
-            const labelEl = document.createElement('label');
-            labelEl.className = 'input-label';
-            labelEl.setAttribute('for', id);
-            labelEl.textContent = label;
+// Klik card ATAU tombol
+gameCards.forEach(card => {
+  card.querySelector('.btn-buy').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal(card);
+  });
 
-            const inputEl = document.createElement('input');
-            inputEl.className = 'input-field';
-            inputEl.type = 'text';
-            inputEl.id = id;
-            inputEl.name = id;
-            inputEl.placeholder = placeholder;
-            if (required) inputEl.required = true;
+  card.addEventListener('click', () => openModal(card));
+});
 
-            wrapper.appendChild(labelEl);
-            wrapper.appendChild(inputEl);
+function openModal(card){
+  selectedGame = card.getAttribute('data-game');
+  modalTitle.textContent = selectedGame;
+  
+  selectedPayment = '';
+document.querySelectorAll('.payment-item').forEach(i => i.classList.remove('active'));
 
-            return wrapper;
-        }
+  priceList.innerHTML = '';
+  inputFieldsContainer.innerHTML = '';
+  selectedItem = null;
 
-        // Function to clear input fields
-        function clearInputFields() {
-            inputFieldsContainer.innerHTML = '';
-        }
+  if (gamePrices[selectedGame]) {
+    gamePrices[selectedGame].forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'price-item';
+      el.innerHTML = `
+        <div>${item.diamond}</div>
+        <div>${item.price}</div>
+      `;
 
-        // Open modal when game card is clicked
-        gameCards.forEach(card => {
-            card.addEventListener('click', function () {
-                selectedGame = this.getAttribute('data-game');
-                modalTitle.textContent = selectedGame;
+      el.onclick = () => {
+        document.querySelectorAll('.price-item').forEach(i => i.style.background = '');
+        el.style.background = 'rgba(255,152,0,0.2)';
+        selectedItem = item;
+      };
 
-                // Clear previous items and inputs
-                priceList.innerHTML = '';
-                clearInputFields();
-                selectedItem = null;
+      priceList.appendChild(el);
+    });
+  }
 
-                // Add price items
-                if (gamePrices[selectedGame]) {
-                    gamePrices[selectedGame].forEach((item, index) => {
-                        const priceItem = document.createElement('div');
-                        priceItem.className = 'price-item';
-                        priceItem.innerHTML = `
-                            <div class="diamond-amount">${item.diamond}</div>
-                            <div class="price-amount">${item.price}</div>
-                        `;
+  // Input
+  inputFieldsContainer.innerHTML = `
+    <div class="input-group">
+      <label class="input-label">ID Game</label>
+      <input id="userId" class="input-field" placeholder="Masukkan ID">
+    </div>
+    ${selectedGame === "Mobile Legends" ? `
+    <div class="input-group">
+      <label class="input-label">Server</label>
+      <input id="server" class="input-field" placeholder="Masukkan Server">
+    </div>` : ``}
+  `;
 
-                        priceItem.addEventListener('click', function () {
-                            // Remove active style from all items
-                            document.querySelectorAll('.price-item').forEach(el => {
-                                el.style.background = 'rgba(255, 255, 255, 0.05)';
-                                el.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                            });
+  modal.classList.add('active');
+}
 
-                            // Add active style to selected item
-                            this.style.background = 'rgba(255, 152, 0, 0.2)';
-                            this.style.borderColor = 'var(--accent)';
+// Close modal
+document.querySelector('.close-modal').onclick = () => {
+  modal.classList.remove('active');
+};
 
-                            selectedItem = {
-                                game: selectedGame,
-                                diamond: item.diamond,
-                                price: item.price
-                            };
-                        });
+// Submit
+orderForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-                        priceList.appendChild(priceItem);
-                    });
-                } else {
-                    priceList.innerHTML = '<p class="text-center text-gray-400">Harga tidak tersedia.</p>';
-                }
+  if (!selectedItem) return alert('Pilih item dulu');
 
-                // Add input fields based on game
-                if (selectedGame === "Mobile Legends") {
-                    // Mobile Legends: ID and Server
-                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
-                    inputFieldsContainer.appendChild(createInputField('server', 'Server', 'Masukkan Server Anda'));
-                } else if (selectedGame === "Free Fire") {
-                    // Free Fire: ID only
-                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
-                } else {
-                    // Other games except Mobile Legends: ID only
-                    inputFieldsContainer.appendChild(createInputField('userId', 'ID Game', 'Masukkan ID Game Anda'));
-                }
+  const userId = document.getElementById('userId').value;
+  const serverInput = document.getElementById('server');
+const server = serverInput ? serverInput.value : '';
+  const payment = selectedPayment;
 
-                modal.classList.add('active');
-            });
-        });
+  if (!userId) return alert('Isi ID');
+  if (selectedGame === "Mobile Legends" && !server) return alert('Isi server');
+  if (!selectedPayment) {
+  alert('Pilih metode pembayaran dulu!');
+  return;
+}
 
-        // Close modal
-        closeModal.addEventListener('click', function () {
-            modal.classList.remove('active');
-            selectedItem = null;
-            orderForm.reset();
-        });
+  const msg = `ORDER TOPUP
+Game: ${selectedGame}
+ID: ${userId}
+Server: ${server}
+Item: ${selectedItem.diamond}
+Harga: ${selectedItem.price}
+Bayar: ${payment}`;
 
-        // Confirm purchase
-        orderForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+  window.open(`https://wa.me/6285881867694?text=${encodeURIComponent(msg)}`);
 
-            if (!selectedItem) {
-                alert('Silakan pilih item terlebih dahulu');
-                return;
-            }
+  modal.classList.remove('active');
+});
 
-            // Validate inputs
-            const userIdInput = orderForm.querySelector('#userId');
-            const serverInput = orderForm.querySelector('#server');
+let selectedPayment = '';
 
-            if (!userIdInput || userIdInput.value.trim() === '') {
-                alert('Silakan masukkan ID Game Anda');
-                userIdInput?.focus();
-                return;
-            }
-
-            if (selectedGame === "Mobile Legends") {
-                if (!serverInput || serverInput.value.trim() === '') {
-                    alert('Silakan masukkan Server Anda');
-                    serverInput?.focus();
-                    return;
-                }
-            }
-
-            const whatsappNumber = '6285881867694'; // Ganti dengan nomor WhatsApp Anda
-
-            let message = `Halo, saya ingin membeli topup game:\n\nID Game: ${userIdInput.value.trim()}\nGame: ${selectedItem.game}\nItem: ${selectedItem.diamond}\nHarga: ${selectedItem.price}`;
-
-            if (selectedGame === "Mobile Legends") {
-                message += `\nServer: ${serverInput.value.trim()}`;
-            }
-
-            message += `\n\nSilakan proses pesanan saya.`;
-
-            const encodedMessage = encodeURIComponent(message);
-
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-
-            modal.classList.remove('active');
-            selectedItem = null;
-            orderForm.reset();
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function (event) {
-            if (event.target === modal) {
-                modal.classList.remove('active');
-                selectedItem = null;
-                orderForm.reset();
-            }
-        });
-  </script>
+document.querySelectorAll('.payment-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.payment-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    selectedPayment = item.getAttribute('data-value');
+  });
+});
+</script>
  </body>
 </html>
